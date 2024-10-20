@@ -1,0 +1,9 @@
+DELIMITER //
+CREATE PROCEDURE OtherBooksOfAuthor(IN p_Author VARCHAR(45))
+BEGIN
+    SELECT book_code,book_author,book_name,book_category FROM book
+    WHERE book_author IN (SELECT author_name FROM authors WHERE author_name = p_Author);
+END //
+DELIMITER ;
+
+CALL OtherBooksOfAuthor('Aykut');

@@ -1,0 +1,67 @@
+CREATE DATABASE library;
+USE library;
+
+CREATE TABLE authors (
+    idauthor INT NOT NULL AUTO_INCREMENT,
+    author_name VARCHAR(45),
+    PRIMARY KEY (idauthor)
+);
+
+CREATE TABLE publisher (
+    idpublisher INT NOT NULL AUTO_INCREMENT,
+    publisher_name VARCHAR(45),
+    PRIMARY KEY (idpublisher)
+);
+
+CREATE TABLE category (
+    idcategory INT NOT NULL AUTO_INCREMENT,
+    category_name VARCHAR(45),
+    PRIMARY KEY (idcategory)
+);
+
+CREATE TABLE users (
+    idusers INT NOT NULL AUTO_INCREMENT,
+    user_name VARCHAR(45),
+    user_email VARCHAR(45),
+    user_password VARCHAR(45),
+    PRIMARY KEY (idusers)
+);
+
+CREATE TABLE book (
+    id INT NOT NULL AUTO_INCREMENT,
+    book_name VARCHAR(45),
+    book_description VARCHAR(100),
+    book_code VARCHAR(45),
+    book_category VARCHAR(30),
+    book_author VARCHAR(30),
+    book_publisher VARCHAR(30),
+    book_price INT,
+    idauthor INT,
+    idpublisher INT,
+    idcategory INT,
+    FOREIGN KEY (idauthor) REFERENCES authors(idauthor),
+    FOREIGN KEY (idpublisher) REFERENCES publisher(idpublisher),
+    FOREIGN KEY (idcategory) REFERENCES category(idcategory),
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE clients (
+    idclients INT NOT NULL AUTO_INCREMENT,
+    client_name VARCHAR(45),
+    client_email VARCHAR(45),
+    client_nationalid VARCHAR(45),
+    idusers INT,
+    FOREIGN KEY (idusers) REFERENCES users(idusers),
+    PRIMARY KEY (idclients)
+);
+
+CREATE TABLE dayoperations (
+    id INT NOT NULL AUTO_INCREMENT,
+    book_name VARCHAR(45),
+    type VARCHAR(45),
+    days INT, 
+    date DATE,
+    client VARCHAR(45),
+    to_date DATE,
+    PRIMARY KEY (id)
+);
